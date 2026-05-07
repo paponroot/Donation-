@@ -50,8 +50,8 @@ class ClothingItem {
     }
 
     public String toFileString() {
-        return id + "|" + category + "|" + status + "|" +
-               donorName + "|" + donorEmail + "|" + donorPhone;
+        return id + " ." + category + " ." + status + " ." +
+               donorName + " ." + donorEmail + " ." + donorPhone;
     }
 }
 
@@ -81,7 +81,7 @@ class FileRepository {
         java.util.List<String> list = getItems();
         try (PrintWriter w = new PrintWriter(file)) {
             for (String s : list) {
-                if (!s.startsWith(id + "|")) w.println(s);
+                if (!s.startsWith(id + " .")) w.println(s);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Delete failed");
@@ -180,9 +180,9 @@ class MainFrame extends JFrame {
 
         if (category == null) return;
 
-        String name = JOptionPane.showInputDialog("Enter your name");
-        String email = JOptionPane.showInputDialog("Enter your email");
-        String phone = JOptionPane.showInputDialog("Enter your phone");
+        String name = JOptionPane.showInputDialog("Enter your name : ");
+        String email = JOptionPane.showInputDialog("Enter your email : ");
+        String phone = JOptionPane.showInputDialog("Enter your phone : ");
 
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "All fields required");
@@ -205,7 +205,7 @@ class MainFrame extends JFrame {
     }
 
     private void deleteItem() {
-        String id = JOptionPane.showInputDialog("Enter item id");
+        String id = JOptionPane.showInputDialog("Enter item id :");
         if (id == null) return;
 
         repo.deleteItem(id);
